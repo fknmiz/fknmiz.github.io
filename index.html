@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Stack M1Z (v2.3 - Executive Blurb)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-gradient: linear-gradient(135deg, #021027 0%, #04293A 50%, #083D56 100%);
+            --card-bg: rgba(12, 122, 148, 0.1);
+            --card-hover-bg: rgba(12, 122, 148, 0.15);
+            --border-color: rgba(117, 221, 221, 0.2);
+            --text-primary: #e0f7fa;
+            --text-secondary: #b0bec5;
+            --glow-color-1: #00e5ff;
+            --glow-color-2: #84ffff;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-x: hidden;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1900px;
+            width: 100%;
+            perspective: 1500px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-top: 10px;
+        }
+        
+        .executive-blurb {
+            font-size: 1em;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin: 20px auto 0;
+            max-width: 800px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px var(--glow-color-2), 0 0 30px var(--glow-color-1); }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px var(--glow-color-2), 0 0 40px var(--glow-color-2); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s 0.2s ease-out backwards;
+        }
+
+        .search-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        #searchInput {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-size: 1em;
+            width: 100%;
+            font-family: var(--font-family);
+        }
+        
+        #searchInput::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .filter-buttons button {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-buttons button:hover, .filter-buttons button.active {
+            background: var(--text-primary);
+            color: #021027;
+            box-shadow: 0 0 15px rgba(117, 221, 221, 0.4);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .category {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 650px;
+            overflow-y: auto;
+            animation: fadeInUp 0.8s 0.4s ease-out backwards;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: var(--card-hover-bg);
+        }
+
+        .category::-webkit-scrollbar { width: 6px; }
+        .category::-webkit-scrollbar-track { background: transparent; }
+        .category::-webkit-scrollbar-thumb { background: rgba(117, 221, 221, 0.2); border-radius: 10px; }
+        .category::-webkit-scrollbar-thumb:hover { background: rgba(117, 221, 221, 0.3); }
+
+        .category-title {
+            color: var(--text-primary);
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: -25px;
+            background: inherit;
+            padding: 20px 0 15px;
+            z-index: 10;
+        }
+
+        .category-icon { font-size: 1.5em; }
+
+        .tool-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+
+        .tool-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.1) 100%);
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .tool-name {
+            font-size: 1.15em;
+            font-weight: 700;
+            background: linear-gradient(90deg, #e0f7fa, #b0bec5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .tool-accolade {
+            font-size: 0.7em;
+            font-weight: 600;
+            color: var(--glow-color-1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: auto;
+            opacity: 0.9;
+            padding-top: 10px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            gap: 20px;
+            animation: fadeInUp 0.8s 0.6s ease-out backwards;
+        }
+
+        .stat { text-align: center; color: var(--text-primary); min-width: 120px; }
+        .stat-number { font-size: 2.8em; font-weight: 700; background: linear-gradient(90deg, var(--glow-color-2), var(--glow-color-1)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-label { font-size: 0.9em; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .controls { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <header>
+            <h1>Tech Stack M1Z</h1>
+            <p class="subtitle">An Integrated Ecosystem of Premium Tools Powering Creative & Technical Strategy</p>
+            <p class="executive-blurb">
+                With a 30-year career forged at industry giants like IBM, CyberArk, and Alteryx, I specialize in transforming complex business needs into powerful, scalable digital ecosystems. This is the toolkit that turns that strategy into a competitive advantage.
+            </p>
+        </header>
+
+        <div class="controls">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for a tool...">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="ai">AI</button>
+                <button class="filter-btn" data-filter="media">Media</button>
+                <button class="filter-btn" data-filter="marketing">Marketing</button>
+                <button class="filter-btn" data-filter="analytics">Analytics</button>
+            </div>
+        </div>
+        
+        <div class="tech-grid">
+            <!-- CATEGORY: AI & Language Models -->
+            <div class="category" data-category="ai">
+                <div class="category-title"><span class="category-icon">🤖</span>AI & Language Models</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">GPT-5</div></div><div class="tool-description">OpenAI's most advanced generative model.</div></div><div class="tool-accolade">Industry-Defining LLM</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Gemini Flash 2.5+</div></div><div class="tool-description">Google's ultra-fast, multimodal AI model.</div></div><div class="tool-accolade">Google's Flagship Model</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Claude Opus 4.1</div></div><div class="tool-description">Anthropic's frontier AI for complex reasoning.</div></div><div class="tool-accolade">Top-Rated for Reasoning</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Grok</div></div><div class="tool-description">xAI's conversational AI with real-time knowledge.</div></div><div class="tool-accolade">Real-Time X Integration</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Microsoft CoPilot</div></div><div class="tool-description">AI productivity assistant integrated across Microsoft 365.</div></div><div class="tool-accolade">Gartner MQ Leader 2024</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Perplexity</div></div><div class="tool-description">AI-powered conversational search engine.</div></div><div class="tool-accolade">Forbes AI 50 2024</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Jasper</div></div><div class="tool-description">AI content platform for marketing and sales.</div></div><div class="tool-accolade">G2 Leader in AI Writing</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Jules</div></div><div class="tool-description">Specialized AI coding assistant for developers.</div></div></div>
+            </div>
+
+            <!-- CATEGORY: Video, Audio & Visual -->
+            <div class="category" data-category="media">
+                <div class="category-title"><span class="category-icon">🎬</span>Video, Audio & Visual</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">SORA</div></div><div class="tool-description">OpenAI's text-to-video generation model.</div></div><div class="tool-accolade">Pioneering Video AI</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Kling</div></div><div class="tool-description">AI video creation with high fidelity and realism.</div></div><div class="tool-accolade">High-Fidelity Video Gen</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">VEO3</div></div><div class="tool-description">Google's flagship text-to-video model.</div></div><div class="tool-accolade">Google's Premier Video AI</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Suno</div></div><div class="tool-description">AI music and song generation from text prompts.</div></div><div class="tool-accolade">Fast Company Most Innovative</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Eleven Labs</div></div><div class="tool-description">Lifelike voice synthesis and custom voice cloning.</div></div><div class="tool-accolade">Leader in Voice AI</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Hey Gen</div></div><div class="tool-description">AI video platform with avatars and voice cloning.</div></div><div class="tool-accolade">Top AI Video Generator</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Runway</div></div><div class="tool-description">Advanced AI video editing and generation suite.</div></div><div class="tool-accolade">TIME100 Most Influential Co.</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Adobe Creative Cloud</div></div><div class="tool-description">Complete creative suite for design, video, and web.</div></div><div class="tool-accolade">Industry Standard Suite</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Wistia</div></div><div class="tool-description">Video hosting platform with in-depth analytics.</div></div><div class="tool-accolade">Leader in Video Hosting</div></div>
+            </div>
+
+            <!-- CATEGORY: Marketing & Growth -->
+            <div class="category" data-category="marketing">
+                <div class="category-title"><span class="category-icon">📈</span>Marketing & Growth</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">HubSpot Marketing Hub</div></div><div class="tool-description">All-in-one marketing automation platform.</div></div><div class="tool-accolade">Gartner MQ Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Marketo Engage</div></div><div class="tool-description">Enterprise-level marketing automation.</div></div><div class="tool-accolade">Forrester Wave Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Salesforce CRM</div></div><div class="tool-description">Customer relationship management platform.</div></div><div class="tool-accolade">#1 CRM Worldwide</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Ahrefs</div></div><div class="tool-description">All-in-one SEO toolset for professionals.</div></div><div class="tool-accolade">Top Tool for SEOs</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Drift Chatbot</div></div><div class="tool-description">Conversational marketing and sales platform.</div></div><div class="tool-accolade">Forrester Wave Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Mailchimp</div></div><div class="tool-description">Email marketing and automation service.</div></div><div class="tool-accolade">Most Popular Email Platform</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">ZoomInfo</div></div><div class="tool-description">B2B contact and company intelligence database.</div></div><div class="tool-accolade">G2 Leader in Sales Intel</div></div>
+            </div>
+            
+            <!-- CATEGORY: Analytics & Data Intelligence -->
+            <div class="category" data-category="analytics">
+                <div class="category-title"><span class="category-icon">📊</span>Analytics & Data Intelligence</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google Analytics 4</div></div><div class="tool-description">Web and app analytics platform.</div></div><div class="tool-accolade">Web Analytics Standard</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Looker Studio</div></div><div class="tool-description">Data visualization and BI dashboarding tool.</div></div><div class="tool-accolade">Leader in BI Platforms</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">6sense</div></div><div class="tool-description">B2B predictive intelligence for revenue teams.</div></div><div class="tool-accolade">Forrester Wave Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google Tag Manager</div></div><div class="tool-description">Manage and deploy marketing tags on your website.</div></div><div class="tool-accolade">Essential for Marketers</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Optimizely</div></div><div class="tool-description">A/B testing and digital experimentation platform.</div></div><div class="tool-accolade">Gartner MQ Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Pingdom</div></div><div class="tool-description">Website performance and availability monitoring.</div></div><div class="tool-accolade">Top Uptime Monitor</div></div>
+            </div>
+
+            <!-- CATEGORY: Web & Infrastructure -->
+            <div class="category" data-category="web">
+                <div class="category-title"><span class="category-icon">🌐</span>Web & Infrastructure</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">WordPress</div></div><div class="tool-description">Flexible and powerful content management system.</div></div><div class="tool-accolade">Powers 43% of The Web</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">WebFlow</div></div><div class="tool-description">Visual web development and hosting platform.</div></div><div class="tool-accolade">Top Visual Web Builder</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Drupal</div></div><div class="tool-description">Enterprise-grade open-source CMS.</div></div><div class="tool-accolade">Leader in Enterprise CMS</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">WP-Engine</div></div><div class="tool-description">Managed WordPress hosting platform.</div></div><div class="tool-accolade">Top Managed Host</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Cloudflare</div></div><div class="tool-description">CDN, DNS, DDoS protection, and security.</div></div><div class="tool-accolade">Leader in CDN & Security</div></div>
+            </div>
+            
+            <!-- CATEGORY: Development & Operations -->
+            <div class="category" data-category="dev">
+                <div class="category-title"><span class="category-icon">🔧</span>Development & Operations</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">GitHub</div></div><div class="tool-description">Code hosting, version control, and collaboration.</div></div><div class="tool-accolade">Standard for Devs</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google AI Studio</div></div><div class="tool-description">Web-based tools for prototyping with generative models.</div></div><div class="tool-accolade">Top for Prototyping</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Hugging Face</div></div><div class="tool-description">Community and platform for ML models and datasets.</div></div><div class="tool-accolade">The AI Community Hub</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">VS Code</div></div><div class="tool-description">Extensible code editor for modern web development.</div></div><div class="tool-accolade">#1 Code Editor</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Postman API</div></div><div class="tool-description">API platform for building and using APIs.</div></div><div class="tool-accolade">Leader in API Platforms</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Zapier</div></div><div class="tool-description">Automate workflows by connecting apps and services.</div></div><div class="tool-accolade">#1 Automation Platform</div></div>
+            </div>
+
+            <!-- CATEGORY: Project Management -->
+            <div class="category" data-category="pm">
+                <div class="category-title"><span class="category-icon">📋</span>Project Management</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Jira</div></div><div class="tool-description">Issue tracking and agile project management.</div></div><div class="tool-accolade">Agile Project Standard</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Asana</div></div><div class="tool-description">Work management platform for teams.</div></div><div class="tool-accolade">Forrester Wave Leader</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Basecamp</div></div><div class="tool-description">All-in-one toolkit for working remotely.</div></div><div class="tool-accolade">Pioneer in Remote Work</div></div>
+            </div>
+            
+            <!-- CATEGORY: Local LLMs -->
+            <div class="category" data-category="local">
+                <div class="category-title"><span class="category-icon">💻</span>Local LLMs (LM Studio)</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Mistral 7B Instruct</div></div><div class="tool-description">Highly efficient, high-performing open-source LLM.</div></div><div class="tool-accolade">Top Efficient LLM</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">QWEN</div></div><div class="tool-description">Multilingual series of models by Alibaba Cloud.</div></div><div class="tool-accolade">Leading Multilingual LLM</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">DeepSeek R1</div></div><div class="tool-description">Advanced open-source model with strong reasoning.</div></div><div class="tool-accolade">Top Open-Source Coder</div></div>
+            </div>
+
+             <!-- CATEGORY: Advertising Platforms -->
+            <div class="category" data-category="ads">
+                <div class="category-title"><span class="category-icon">📢</span>Advertising Platforms</div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google Ads</div></div><div class="tool-description">PPC advertising platform for search and display.</div></div><div class="tool-accolade">#1 Ad Platform</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google Ad Manager</div></div><div class="tool-description">Comprehensive ad serving and management.</div></div><div class="tool-accolade">Industry Standard Ad Server</div></div>
+                <div class="tool-card"><div><div class="tool-header"><div class="tool-name">Google Marketing Platform</div></div><div class="tool-description">Unified advertising and analytics suite.</div></div><div class="tool-accolade">Integrated Marketing Leader</div></div>
+            </div>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat"><div class="stat-number">50+</div><div class="stat-label">Validated Tools</div></div>
+            <div class="stat"><div class="stat-number">9</div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-number">8</div><div class="stat-label">Google Suite</div></div>
+            <div class="stat"><div class="stat-number">3</div><div class="stat-label">Local LLMs</div></div>
+            <div class="stat"><div class="stat-number">1</div><div class="stat-label">Unified Stack</div></div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Interactive 3D tilt effect for tool cards
+            const cards = document.querySelectorAll('.tool-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+
+            // Search and Filter Logic
+            const searchInput = document.getElementById('searchInput');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const toolCards = document.querySelectorAll('.tool-card');
+            const categories = document.querySelectorAll('.category');
+
+            function filterAndSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+                categories.forEach(category => {
+                    let hasVisibleCard = false;
+                    const categoryCards = category.querySelectorAll('.tool-card');
+                    
+                    categoryCards.forEach(card => {
+                        const cardText = card.textContent.toLowerCase();
+                        const cardCategory = category.dataset.category;
+
+                        const searchMatch = cardText.includes(searchTerm);
+                        const filterMatch = activeFilter === 'all' || activeFilter === cardCategory;
+
+                        if (searchMatch && filterMatch) {
+                            card.style.display = 'flex';
+                            hasVisibleCard = true;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+
+                    // Hide the entire category if no cards within it are visible
+                    if(hasVisibleCard) {
+                        category.style.display = 'block';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            }
+
+            searchInput.addEventListener('keyup', filterAndSearch);
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterAndSearch();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
